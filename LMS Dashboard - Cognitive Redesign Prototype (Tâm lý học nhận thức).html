@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)file:///C:/Users/Admin/Videos/Captures/tlh/index.html -->
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMS Dashboard - Cognitive Redesign Prototype (Tâm lý học nhận thức)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="./LMS Dashboard - Cognitive Redesign Prototype (Tâm lý học nhận thức)_files/saved_resource"></script>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./LMS Dashboard - Cognitive Redesign Prototype (Tâm lý học nhận thức)_files/css2" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="./LMS Dashboard - Cognitive Redesign Prototype (Tâm lý học nhận thức)_files/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            serif: ['"Times New Roman"', 'Times', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#EEF2FF',
+              100: '#E0E7FF',
+              200: '#C7D2FE',
+              500: '#4F46E5',
+              600: '#4338CA',
+              700: '#3730A3',
+            },
+            urgency: {
+              red: '#EF4444',
+              orange: '#F59E0B',
+              green: '#10B981',
+              blue: '#2563EB',
+            }
+          },
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02)',
+            'card': '0 4px 20px -2px rgba(15, 23, 42, 0.06)',
+            'glow-red': '0 0 20px -3px rgba(239, 68, 68, 0.35)',
+            'glow-blue': '0 0 20px -3px rgba(59, 130, 246, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth transition for theme & mode swap */
+    * {
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Pulse badge for urgency */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+    .urgent-pulse {
+      animation: pulse-ring 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+    /* Cognitive annotation tooltip */
+    .cognitive-badge {
+      position: relative;
+    }
+    .cognitive-badge::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      padding: 6px 10px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-size: 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.2s ease;
+      z-index: 50;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .cognitive-badge:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Old LMS styles simulation */
+    .old-lms {
+      font-family: 'Times New Roman', Times, serif !important;
+      background-color: #f5f5f5 !important;
+      color: #000 !important;
+    }
+    .old-lms table, .old-lms th, .old-lms td {
+      border: 1px solid #7f9db9;
+    }
+    .old-lms a {
+      color: #0000cc !important;
+      text-decoration: underline !important;
+    }
+    .old-lms a:visited {
+      color: #551a8b !important;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Plus Jakarta Sans", Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.-top-3{top:-0.75rem}.left-0{left:0px}.left-3\.5{left:0.875rem}.left-4{left:1rem}.right-0{right:0px}.right-1\.5{right:0.375rem}.right-3{right:0.75rem}.top-0{top:0px}.top-1\.5{top:0.375rem}.top-1\/2{top:50%}.top-\[49px\]{top:49px}.top-full{top:100%}.bottom-6{bottom:1.5rem}.right-6{right:1.5rem}.z-40{z-index:40}.z-50{z-index:50}.col-span-12{grid-column:span 12 / span 12}.mx-auto{margin-left:auto;margin-right:auto}.my-1{margin-top:0.25rem;margin-bottom:0.25rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.ml-1{margin-left:0.25rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.line-clamp-1{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-2\.5{height:0.625rem}.h-3{height:0.75rem}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-full{height:100%}.max-h-24{max-height:6rem}.max-h-48{max-height:12rem}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-2{width:0.5rem}.w-2\.5{width:0.625rem}.w-3{width:0.75rem}.w-3\.5{width:0.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-8{width:2rem}.w-80{width:20rem}.w-9{width:2.25rem}.w-full{width:100%}.w-px{width:1px}.max-w-7xl{max-width:80rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.border-collapse{border-collapse:collapse}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-20{--tw-translate-y:5rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-95{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.grid-cols-7{grid-template-columns:repeat(7, minmax(0, 1fr))}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-7{gap:1.75rem}.space-y-0\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.125rem * var(--tw-space-y-reverse))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-3\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.875rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.875rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-7 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.75rem * var(--tw-space-y-reverse))}.self-start{align-self:flex-start}.self-stretch{align-self:stretch}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-b-4{border-bottom-width:4px}.border-l{border-left-width:1px}.border-l-2{border-left-width:2px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-100{--tw-border-opacity:1;border-color:rgb(254 243 199 / var(--tw-border-opacity, 1))}.border-amber-100\/70{border-color:rgb(254 243 199 / 0.7)}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254 / var(--tw-border-opacity, 1))}.border-blue-100\/70{border-color:rgb(219 234 254 / 0.7)}.border-blue-300{--tw-border-opacity:1;border-color:rgb(147 197 253 / var(--tw-border-opacity, 1))}.border-blue-400{--tw-border-opacity:1;border-color:rgb(96 165 250 / var(--tw-border-opacity, 1))}.border-cyan-400\/30{border-color:rgb(34 211 238 / 0.3)}.border-cyan-800\/50{border-color:rgb(21 94 117 / 0.5)}.border-emerald-100{--tw-border-opacity:1;border-color:rgb(209 250 229 / var(--tw-border-opacity, 1))}.border-emerald-100\/70{border-color:rgb(209 250 229 / 0.7)}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.border-indigo-100{--tw-border-opacity:1;border-color:rgb(224 231 255 / var(--tw-border-opacity, 1))}.border-indigo-200{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity, 1))}.border-purple-100{--tw-border-opacity:1;border-color:rgb(243 232 255 / var(--tw-border-opacity, 1))}.border-purple-100\/70{border-color:rgb(243 232 255 / 0.7)}.border-red-300{--tw-border-opacity:1;border-color:rgb(252 165 165 / var(--tw-border-opacity, 1))}.border-rose-100{--tw-border-opacity:1;border-color:rgb(255 228 230 / var(--tw-border-opacity, 1))}.border-rose-200{--tw-border-opacity:1;border-color:rgb(254 205 211 / var(--tw-border-opacity, 1))}.border-rose-300{--tw-border-opacity:1;border-color:rgb(253 164 175 / var(--tw-border-opacity, 1))}.border-rose-400{--tw-border-opacity:1;border-color:rgb(251 113 133 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-200\/60{border-color:rgb(226 232 240 / 0.6)}.border-slate-200\/70{border-color:rgb(226 232 240 / 0.7)}.border-slate-200\/80{border-color:rgb(226 232 240 / 0.8)}.border-slate-300{--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.border-slate-400{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-yellow-400{--tw-border-opacity:1;border-color:rgb(250 204 21 / var(--tw-border-opacity, 1))}.border-yellow-500{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-50\/60{background-color:rgb(255 251 235 / 0.6)}.bg-amber-50\/70{background-color:rgb(255 251 235 / 0.7)}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.bg-amber-500\/20{background-color:rgb(245 158 11 / 0.2)}.bg-amber-600{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-50\/60{background-color:rgb(239 246 255 / 0.6)}.bg-blue-50\/70{background-color:rgb(239 246 255 / 0.7)}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-blue-800{--tw-bg-opacity:1;background-color:rgb(30 64 175 / var(--tw-bg-opacity, 1))}.bg-cyan-400\/10{background-color:rgb(34 211 238 / 0.1)}.bg-cyan-500\/20{background-color:rgb(6 182 212 / 0.2)}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/60{background-color:rgb(236 253 245 / 0.6)}.bg-emerald-50\/70{background-color:rgb(236 253 245 / 0.7)}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-indigo-400\/30{background-color:rgb(129 140 248 / 0.3)}.bg-indigo-50{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.bg-indigo-500\/20{background-color:rgb(99 102 241 / 0.2)}.bg-indigo-600{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.bg-purple-100{--tw-bg-opacity:1;background-color:rgb(243 232 255 / var(--tw-bg-opacity, 1))}.bg-purple-50{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.bg-purple-50\/60{background-color:rgb(250 245 255 / 0.6)}.bg-purple-500{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.bg-red-400{--tw-bg-opacity:1;background-color:rgb(248 113 113 / var(--tw-bg-opacity, 1))}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230 / var(--tw-bg-opacity, 1))}.bg-rose-400{--tw-bg-opacity:1;background-color:rgb(251 113 133 / var(--tw-bg-opacity, 1))}.bg-rose-50{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.bg-rose-50\/60{background-color:rgb(255 241 242 / 0.6)}.bg-rose-50\/70{background-color:rgb(255 241 242 / 0.7)}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94 / var(--tw-bg-opacity, 1))}.bg-rose-600{--tw-bg-opacity:1;background-color:rgb(225 29 72 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-100\/80{background-color:rgb(241 245 249 / 0.8)}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/95{background-color:rgb(255 255 255 / 0.95)}.bg-yellow-200{--tw-bg-opacity:1;background-color:rgb(254 240 138 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-opacity-95{--tw-bg-opacity:0.95}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-blue-900{--tw-gradient-from:#1e3a8a var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 58 138 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-cyan-900{--tw-gradient-from:#164e63 var(--tw-gradient-from-position);--tw-gradient-to:rgb(22 78 99 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-indigo-500{--tw-gradient-from:#6366f1 var(--tw-gradient-from-position);--tw-gradient-to:rgb(99 102 241 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-indigo-600{--tw-gradient-from:#4f46e5 var(--tw-gradient-from-position);--tw-gradient-to:rgb(79 70 229 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-indigo-950{--tw-gradient-to:rgb(30 27 75 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #1e1b4b var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-blue-500{--tw-gradient-to:#3b82f6 var(--tw-gradient-to-position)}.to-blue-700{--tw-gradient-to:#1d4ed8 var(--tw-gradient-to-position)}.to-indigo-700{--tw-gradient-to:#4338ca var(--tw-gradient-to-position)}.to-slate-900{--tw-gradient-to:#0f172a var(--tw-gradient-to-position)}.fill-current{fill:currentColor}.p-1{padding:0.25rem}.p-1\.5{padding:0.375rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-2{padding-bottom:0.5rem}.pb-4{padding-bottom:1rem}.pl-1{padding-left:0.25rem}.pl-10{padding-left:2.5rem}.pl-3{padding-left:0.75rem}.pl-4{padding-left:1rem}.pl-5{padding-left:1.25rem}.pr-12{padding-right:3rem}.pt-3{padding-top:0.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:"Plus Jakarta Sans", Inter, sans-serif}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-blue-900{--tw-text-opacity:1;color:rgb(30 58 138 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-indigo-100{--tw-text-opacity:1;color:rgb(224 231 255 / var(--tw-text-opacity, 1))}.text-indigo-200{--tw-text-opacity:1;color:rgb(199 210 254 / var(--tw-text-opacity, 1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.text-indigo-700{--tw-text-opacity:1;color:rgb(67 56 202 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-purple-700{--tw-text-opacity:1;color:rgb(126 34 206 / var(--tw-text-opacity, 1))}.text-purple-800{--tw-text-opacity:1;color:rgb(107 33 168 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-red-800{--tw-text-opacity:1;color:rgb(153 27 27 / var(--tw-text-opacity, 1))}.text-red-900{--tw-text-opacity:1;color:rgb(127 29 29 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-rose-500{--tw-text-opacity:1;color:rgb(244 63 94 / var(--tw-text-opacity, 1))}.text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.text-rose-700{--tw-text-opacity:1;color:rgb(190 18 60 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-200{--tw-text-opacity:1;color:rgb(254 240 138 / var(--tw-text-opacity, 1))}.text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-60{opacity:0.6}.opacity-75{opacity:0.75}.opacity-0{opacity:0}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-card{--tw-shadow:0 4px 20px -2px rgba(15, 23, 42, 0.06);--tw-shadow-colored:0 4px 20px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-soft{--tw-shadow:0 2px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);--tw-shadow-colored:0 2px 15px -3px var(--tw-shadow-color), 0 4px 6px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-amber-200{--tw-shadow-color:#fde68a;--tw-shadow:var(--tw-shadow-colored)}.shadow-emerald-200{--tw-shadow-color:#a7f3d0;--tw-shadow:var(--tw-shadow-colored)}.shadow-indigo-100{--tw-shadow-color:#e0e7ff;--tw-shadow:var(--tw-shadow-colored)}.shadow-rose-200{--tw-shadow-color:#fecdd3;--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-transparent{--tw-ring-color:transparent}.ring-white{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity, 1))}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.duration-300{transition-duration:300ms}.selection\:bg-brand-100 *::selection{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.selection\:text-brand-700 *::selection{--tw-text-opacity:1;color:rgb(55 48 163 / var(--tw-text-opacity, 1))}.selection\:bg-brand-100::selection{--tw-bg-opacity:1;background-color:rgb(224 231 255 / var(--tw-bg-opacity, 1))}.selection\:text-brand-700::selection{--tw-text-opacity:1;color:rgb(55 48 163 / var(--tw-text-opacity, 1))}.placeholder\:text-slate-400::placeholder{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.hover\:border-amber-200:hover{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.hover\:border-amber-400:hover{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.hover\:border-emerald-200:hover{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.hover\:border-emerald-400:hover{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.hover\:border-indigo-200:hover{--tw-border-opacity:1;border-color:rgb(199 210 254 / var(--tw-border-opacity, 1))}.hover\:border-indigo-500:hover{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.hover\:border-purple-200:hover{--tw-border-opacity:1;border-color:rgb(233 213 255 / var(--tw-border-opacity, 1))}.hover\:bg-amber-600:hover{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.hover\:bg-amber-700:hover{--tw-bg-opacity:1;background-color:rgb(180 83 9 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-50\/50:hover{background-color:rgb(239 246 255 / 0.5)}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-50:hover{--tw-bg-opacity:1;background-color:rgb(238 242 255 / var(--tw-bg-opacity, 1))}.hover\:bg-indigo-50\/30:hover{background-color:rgb(238 242 255 / 0.3)}.hover\:bg-indigo-600:hover{--tw-bg-opacity:1;background-color:rgb(79 70 229 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-50:hover{--tw-bg-opacity:1;background-color:rgb(250 245 255 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-600:hover{--tw-bg-opacity:1;background-color:rgb(147 51 234 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-700:hover{--tw-bg-opacity:1;background-color:rgb(190 18 60 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-100:hover{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:text-amber-600:hover{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.hover\:text-blue-800:hover{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.hover\:text-emerald-600:hover{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.hover\:text-indigo-600:hover{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.hover\:text-indigo-800:hover{--tw-text-opacity:1;color:rgb(55 48 163 / var(--tw-text-opacity, 1))}.hover\:text-purple-600:hover{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.hover\:text-slate-700:hover{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.hover\:text-slate-800:hover{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:shadow-card:hover{--tw-shadow:0 4px 20px -2px rgba(15, 23, 42, 0.06);--tw-shadow-colored:0 4px 20px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-glow-red:hover{--tw-shadow:0 0 20px -3px rgba(239, 68, 68, 0.35);--tw-shadow-colored:0 0 20px -3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:border-indigo-400:focus{--tw-border-opacity:1;border-color:rgb(129 140 248 / var(--tw-border-opacity, 1))}.focus\:border-indigo-500:focus{--tw-border-opacity:1;border-color:rgb(99 102 241 / var(--tw-border-opacity, 1))}.focus\:bg-white:focus{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-4:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-indigo-100:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(224 231 255 / var(--tw-ring-opacity, 1))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-indigo-600{--tw-text-opacity:1;color:rgb(79 70 229 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-rose-600{--tw-text-opacity:1;color:rgb(225 29 72 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:ring-indigo-200{--tw-ring-opacity:1;--tw-ring-color:rgb(199 210 254 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:block{display:block}.sm\:inline-block{display:inline-block}.sm\:inline{display:inline}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-start{justify-content:flex-start}.sm\:gap-2{gap:0.5rem}.sm\:self-auto{align-self:auto}.sm\:p-5{padding:1.25rem}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:col-span-3{grid-column:span 3 / span 3}.md\:col-span-6{grid-column:span 6 / span 6}.md\:block{display:block}.md\:flex{display:flex}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:self-auto{align-self:auto}.md\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 1024px){.lg\:col-span-4{grid-column:span 4 / span 4}.lg\:col-span-8{grid-column:span 8 / span 8}.lg\:block{display:block}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen selection:bg-brand-100 selection:text-brand-700">
+
+  <!-- ========================================================================= -->
+  <!-- BAR ĐIỀU KHIỂN A/B TESTING (NỔI BẬT & CỐ ĐỊNH TRÊN CÙNG) -->
+  <!-- ========================================================================= -->
+  <aside aria-label="A/B Testing Control" class="sticky top-0 z-50 bg-slate-900 text-white border-b border-slate-800 shadow-md backdrop-blur-md bg-opacity-95">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs md:text-sm">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="split" aria-hidden="true" class="lucide lucide-split w-4 h-4"><path d="M16 3h5v5"></path><path d="M8 3H3v5"></path><path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3"></path><path d="m15 9 6-6"></path></svg>
+        </span>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+          <span class="font-bold tracking-wide uppercase text-indigo-300">A/B Testing Simulator:</span>
+          <span class="text-slate-300 hidden sm:inline">So sánh tác động tâm lý học nhận thức &amp; quá tải thông tin</span>
+        </div>
+      </div>
+
+      <!-- Toggle Button Group -->
+      <div class="flex items-center gap-2 bg-slate-800 p-1 rounded-xl border border-slate-700">
+        <button id="btnModeNew" onclick="switchMode('new')" class="px-3.5 py-1.5 rounded-lg font-semibold flex items-center gap-1.5 transition-all bg-indigo-600 text-white shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-3.5 h-3.5 text-indigo-200"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+          <span>LMS Mới (Đã tối ưu)</span>
+          <span class="bg-indigo-400/30 text-indigo-100 text-[10px] px-1.5 py-0.5 rounded-full font-mono">Cognitive UX</span>
+        </button>
+        <button id="btnModeOld" onclick="switchMode('old')" class="px-3.5 py-1.5 rounded-lg font-medium text-slate-300 hover:text-white flex items-center gap-1.5 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-triangle" aria-hidden="true" class="lucide lucide-alert-triangle w-3.5 h-3.5 text-amber-400"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>
+          <span>LMS Cũ (Quá tải)</span>
+          <span class="bg-amber-500/20 text-amber-300 text-[10px] px-1.5 py-0.5 rounded-full font-mono">Overload</span>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Indicator & Cognitive Explainer Toggle -->
+      <div class="flex items-center gap-2">
+        <button id="btnToggleInsights" onclick="toggleCognitiveInsights()" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="brain" aria-hidden="true" class="lucide lucide-brain w-3.5 h-3.5 text-cyan-400"><path d="M12 18V5"></path><path d="M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4"></path><path d="M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294"></path><path d="M17.996 5.125a4 4 0 012.526 5.77"></path><path d="M18 18a4 4 0 002-7.465"></path><path d="M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517"></path><path d="M6 18a4 4 0 01-2-7.465"></path><path d="M6.004 5.125a4 4 0 00-2.526 5.77"></path></svg>
+          <span id="insightText">Bật Chú Giải Nhận Thức</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- PHIÊN BẢN 1: GIAO DIỆN LMS MỚI (TỐI ƯU HÓA TÂM LÝ HỌC NHẬN THỨC) -->
+  <!-- ========================================================================= -->
+  <div id="viewNewLMS" class="transition-opacity duration-300">
+    
+    <!-- Top Bar Tinh Gọn -->
+    <header class="bg-white border-b border-slate-200/80 sticky top-[49px] z-40 backdrop-blur-md bg-white/95">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        
+        <!-- Logo Brand & Campus Context -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-md shadow-indigo-100 font-bold text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="graduation-cap" aria-hidden="true" class="lucide lucide-graduation-cap w-6 h-6"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-900 text-base tracking-tight">UniLMS</span>
+              <span class="bg-indigo-50 text-indigo-700 text-[11px] font-semibold px-2 py-0.5 rounded-md border border-indigo-100">HK1 • 2024-2025</span>
+            </div>
+            <p class="text-[11px] text-slate-400 hidden sm:block">Đại học Khoa học Xã hội &amp; Nhân văn</p>
+          </div>
+        </div>
+
+        <!-- Thanh Tìm Kiếm Nhanh (Selective Focus) -->
+        <div class="flex-1 max-w-md relative hidden md:block">
+          <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+            <input id="globalSearchInput" type="text" placeholder="Tìm nhanh môn học, bài giảng tuần, tài liệu... (Ctrl + K)" class="w-full pl-10 pr-12 py-2 bg-slate-100/80 hover:bg-slate-100 focus:bg-white text-sm rounded-xl border border-transparent focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 outline-none transition-all placeholder:text-slate-400" onfocus="showSearchDropdown(true)" oninput="handleSearch(this.value)">
+            <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] bg-white border border-slate-200 rounded text-slate-400 font-mono shadow-2xs">Ctrl K</kbd>
+          </div>
+
+          <!-- Search Quick Dropdown -->
+          <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 p-2 z-50 text-xs">
+            <div class="p-2 text-slate-400 uppercase font-semibold text-[10px] tracking-wider">Gợi ý tác vụ tức thì:</div>
+            <div class="space-y-1" id="searchResultsContainer">
+              <button onclick="openModal('modalSubmit', 'Tâm lý học Nhận thức - Báo cáo thực nghiệm')" class="w-full text-left p-2 hover:bg-slate-50 rounded-lg flex items-center justify-between text-slate-700">
+                <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-up" aria-hidden="true" class="lucide lucide-file-up w-3.5 h-3.5 text-rose-500"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg> Nộp báo cáo: Trí nhớ làm việc (Hạn hôm nay)</span>
+                <span class="text-rose-500 font-medium text-[11px]">Còn 4h</span>
+              </button>
+              <button onclick="openLectureModal('Tâm lý học Nhận thức', 'Tuần 8: Mô hình trí nhớ làm việc Baddeley')" class="w-full text-left p-2 hover:bg-slate-50 rounded-lg flex items-center justify-between text-slate-700">
+                <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5 text-blue-500"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg> Bài giảng Tuần 8: Tâm lý học Nhận thức</span>
+                <span class="text-slate-400 text-[11px]">Slide PDF</span>
+              </button>
+              <button onclick="openQuizModal('Tâm lý học Phát triển', 'Quiz 15 phút: Thuyết nhận thức Piaget')" class="w-full text-left p-2 hover:bg-slate-50 rounded-lg flex items-center justify-between text-slate-700">
+                <span class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="help-circle" aria-hidden="true" class="lucide lucide-help-circle w-3.5 h-3.5 text-emerald-500"><circle cx="12" cy="12" r="10"></circle><path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5"></path><path d="M12 17h.01"></path></svg> Quiz 15p: Phát triển nhận thức Piaget</span>
+                <span class="text-emerald-600 font-medium text-[11px]">Hạn mai</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Notifications, Quick Help & User Profile -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Notification Bell -->
+          <div class="relative">
+            <button onclick="toggleNotificationPanel()" class="w-9 h-9 rounded-xl hover:bg-slate-100 text-slate-600 flex items-center justify-center relative transition-colors" title="Thông báo quan trọng">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bell" aria-hidden="true" class="lucide lucide-bell w-5 h-5"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+              <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+            </button>
+            
+            <!-- Quick Notification Popover -->
+            <div id="notifPanel" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 p-3 z-50">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-100 mb-2">
+                <span class="font-bold text-slate-800 text-xs">Thông báo học tập cốt lõi (2)</span>
+                <span class="text-[10px] text-indigo-600 hover:underline cursor-pointer">Đã đọc tất cả</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="p-2 bg-rose-50/70 rounded-xl border border-rose-100">
+                  <div class="flex items-center justify-between font-semibold text-rose-700 text-[11px]">
+                    <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" aria-hidden="true" class="lucide lucide-clock w-3 h-3"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Nhắc nhở nộp bài</span>
+                    <span>4 giờ nữa</span>
+                  </div>
+                  <p class="text-slate-600 mt-1">Hạn nộp Báo cáo thực nghiệm Tâm lý học Nhận thức lúc 23:59 đêm nay.</p>
+                </div>
+                <div class="p-2 bg-blue-50/70 rounded-xl border border-blue-100">
+                  <div class="flex items-center justify-between font-semibold text-blue-700 text-[11px]">
+                    <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-text" aria-hidden="true" class="lucide lucide-file-text w-3 h-3"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg> Tài liệu mới</span>
+                    <span>Sáng nay</span>
+                  </div>
+                  <p class="text-slate-600 mt-1">ThS. Lê Thu Hà đã tải lên Slide bài học Tuần 8 - Tâm lý học Phát triển.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+
+          <!-- Student Profile Avatar -->
+          <div class="flex items-center gap-2.5 pl-1 cursor-pointer group" onclick="showToast('Hồ sơ sinh viên: Phạm Minh Nhật (MSSV: 22001429)')">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 text-white font-semibold flex items-center justify-center text-sm shadow-sm ring-2 ring-transparent group-hover:ring-indigo-200 transition-all">
+              MN
+            </div>
+            <div class="hidden lg:block text-left">
+              <div class="text-xs font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">Minh Nhật</div>
+              <div class="text-[10px] text-slate-400">K46 • Tâm lý học</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- BANNER CHÚ GIẢI TÂM LÝ HỌC (ẨN/HIỆN QUA NÚT GẠT) -->
+    <div id="cognitiveInsightsBanner" class="hidden bg-gradient-to-r from-cyan-900 via-indigo-950 to-slate-900 text-white border-b border-cyan-800/50 py-3 px-4">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-3">
+          <span class="p-2 bg-cyan-500/20 text-cyan-400 rounded-lg shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkle" aria-hidden="true" class="lucide lucide-sparkle w-4 h-4"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+          </span>
+          <div>
+            <h4 class="font-bold text-cyan-300">Cơ chế thiết kế dựa trên Tâm lý học Nhận thức (Cognitive Ergonomics):</h4>
+            <p class="text-slate-300 text-[11px] mt-0.5">
+              1. <strong>Tải nhận thức ngoại lai (Extraneous Load):</strong> Giảm 82% thành phần nhiễu •
+              2. <strong>Trí nhớ làm việc (Working Memory):</strong> Giới hạn ≤ 4 cụm xử lý theo Cowan (2001) •
+              3. <strong>Chú ý chọn lọc (Selective Attention):</strong> Quy luật Treisman, quét Deadline trong 3 giây.
+            </p>
+          </div>
+        </div>
+        <span class="text-[11px] bg-cyan-400/10 text-cyan-300 px-2.5 py-1 rounded-full border border-cyan-400/30 whitespace-nowrap self-start md:self-auto">
+          Quy tắc 3 Giây Đạt Chuẩn
+        </span>
+      </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-7">
+      
+      <!-- Greeting & Cognitive Context Bar -->
+      <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-soft">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-xl">
+            👋
+          </div>
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              Xin chào, Minh Nhật!
+              <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">Tuần 8 / 15</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Hôm nay bạn có <strong>1 nhiệm vụ khẩn cấp</strong> cần nộp trước nửa đêm và <strong>2 tiết học</strong> lúc 13:30.</p>
+          </div>
+        </div>
+
+        <!-- Weekly Progress Pill -->
+        <div class="flex items-center gap-3 bg-slate-50 p-2.5 sm:px-4 rounded-xl border border-slate-200/70 self-stretch sm:self-auto justify-between sm:justify-start">
+          <div class="text-left">
+            <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Tiến độ tuần 8</div>
+            <div class="text-sm font-extrabold text-indigo-600">3 / 4 nhiệm vụ</div>
+          </div>
+          <div class="w-16 h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div class="h-full bg-indigo-600 rounded-full" style="width: 75%"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- KHU VỰC 1: CẦN LÀM NGAY (PRIORITY DEADLINES - TỐI ƯU CHÚ Ý CHỌN LỌC) -->
+      <!-- Vị trí cao nhất, mắt quét tới đầu tiên trong 3 giây đầu mở trang -->
+      <!-- ========================================================================= -->
+      <section class="space-y-3.5" id="prioritySection">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+            </span>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+              Cần làm ngay
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-rose-100 text-rose-700 border border-rose-200">
+                Trong 48 giờ tới
+              </span>
+            </h2>
+            <span class="hidden sm:inline-block text-xs text-slate-400 font-normal">
+              (Ưu tiên số 1: Tránh quá tải nhận thức, tối đa 3 tác vụ quan trọng nhất)
+            </span>
+          </div>
+
+          <!-- Color Coding Legend Indicator -->
+          <div class="hidden md:flex items-center gap-3 text-[11px] text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Bài tập khẩn cấp (&lt;24h)</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Bài trắc nghiệm / Quiz</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Dự án nhóm (&lt;48h)</span>
+          </div>
+        </div>
+
+        <!-- Grid 3 Thẻ Deadline Khẩn Cấp -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Card 1: Khẩn Cấp Cao Nhất (< 5 giờ) - Red/Coral -->
+          <div class="relative bg-white rounded-2xl p-4 sm:p-5 border-2 border-rose-400 shadow-card hover:shadow-glow-red transition-all group flex flex-col justify-between">
+            <div class="absolute -top-3 left-4 bg-rose-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" aria-hidden="true" class="lucide lucide-zap w-3 h-3 fill-current"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"></path></svg>
+              <span>Khẩn cấp nhất • Hạn đêm nay</span>
+            </div>
+
+            <div>
+              <div class="flex items-start justify-between gap-2 mt-1">
+                <div>
+                  <span class="text-[11px] font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+                    Tâm lý học Nhận thức
+                  </span>
+                  <h3 class="font-bold text-slate-900 text-base mt-2 group-hover:text-rose-600 transition-colors line-clamp-1">
+                    Báo cáo thực nghiệm: Trí nhớ làm việc
+                  </h3>
+                </div>
+                <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-text" aria-hidden="true" class="lucide lucide-file-text w-4 h-4"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg>
+                </div>
+              </div>
+
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">
+                Nộp file định dạng PDF báo cáo số liệu thực nghiệm đo dung lượng trí nhớ âm vị (Phonological Loop).
+              </p>
+
+              <!-- Live Countdown Display -->
+              <div class="mt-4 p-2.5 rounded-xl bg-rose-50/70 border border-rose-100 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-rose-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clock" aria-hidden="true" class="lucide lucide-clock w-4 h-4 text-rose-500 animate-pulse"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                  <span class="text-xs font-semibold">Thời gian còn lại:</span>
+                </div>
+                <div class="font-mono font-bold text-sm text-rose-700 tracking-tight" id="countdownTimer1">04:14:09</div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span class="text-[11px] text-slate-400">Hạn: 23:59 Hôm nay</span>
+              <button onclick="openModal('modalSubmit', 'Tâm lý học Nhận thức - Báo cáo thực nghiệm')" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white text-xs font-bold rounded-xl shadow-md shadow-rose-200 flex items-center gap-1.5 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload-cloud" aria-hidden="true" class="lucide lucide-upload-cloud w-3.5 h-3.5"><path d="M12 13v8"></path><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="m8 17 4-4 4 4"></path></svg>
+                <span>Nộp bài ngay</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: Quiz Kiến Thức - Green/Emerald -->
+          <div class="relative bg-white rounded-2xl p-4 sm:p-5 border border-emerald-200 shadow-card hover:border-emerald-400 transition-all group flex flex-col justify-between">
+            <div class="absolute -top-3 left-4 bg-emerald-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-3 h-3"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg>
+              <span>Quiz Đánh Giá • 15 Phút</span>
+            </div>
+
+            <div>
+              <div class="flex items-start justify-between gap-2 mt-1">
+                <div>
+                  <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    Tâm lý học Phát triển
+                  </span>
+                  <h3 class="font-bold text-slate-900 text-base mt-2 group-hover:text-emerald-600 transition-colors line-clamp-1">
+                    Quiz 15': Thuyết nhận thức Piaget
+                  </h3>
+                </div>
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" aria-hidden="true" class="lucide lucide-check-square w-4 h-4"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"></path><path d="m9 11 3 3L22 4"></path></svg>
+                </div>
+              </div>
+
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">
+                10 câu trắc nghiệm nhanh đánh giá 4 giai đoạn phát triển nhận thức của trẻ em (Sensorimotor to Formal Operational).
+              </p>
+
+              <!-- Countdown Display -->
+              <div class="mt-4 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-100 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-emerald-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="timer" aria-hidden="true" class="lucide lucide-timer w-4 h-4 text-emerald-600"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg>
+                  <span class="text-xs font-semibold">Thời gian còn lại:</span>
+                </div>
+                <div class="font-mono font-bold text-sm text-emerald-700 tracking-tight" id="countdownTimer2">16:36:57</div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span class="text-[11px] text-slate-400">Hạn: 12:00 Trưa mai</span>
+              <button onclick="openQuizModal('Tâm lý học Phát triển', 'Quiz 15 phút: Thuyết nhận thức Piaget')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold rounded-xl shadow-md shadow-emerald-200 flex items-center gap-1.5 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" aria-hidden="true" class="lucide lucide-play w-3.5 h-3.5 fill-current"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+                <span>Làm Quiz ngay</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Tiểu Luận Nhóm - Orange/Amber -->
+          <div class="relative bg-white rounded-2xl p-4 sm:p-5 border border-amber-200 shadow-card hover:border-amber-400 transition-all group flex flex-col justify-between">
+            <div class="absolute -top-3 left-4 bg-amber-500 text-white text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" aria-hidden="true" class="lucide lucide-users w-3 h-3"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+              <span>Bài tập nhóm</span>
+            </div>
+
+            <div>
+              <div class="flex items-start justify-between gap-2 mt-1">
+                <div>
+                  <span class="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                    PP Nghiên cứu Khoa học
+                  </span>
+                  <h3 class="font-bold text-slate-900 text-base mt-2 group-hover:text-amber-600 transition-colors line-clamp-1">
+                    Nộp đề cương tiểu luận nhóm
+                  </h3>
+                </div>
+                <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="folder-archive" aria-hidden="true" class="lucide lucide-folder-archive w-4 h-4"><circle cx="15" cy="19" r="2"></circle><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"></path><path d="M15 11v-1"></path><path d="M15 17v-2"></path></svg>
+                </div>
+              </div>
+
+              <p class="text-xs text-slate-500 mt-2 line-clamp-2">
+                Đề tài khảo sát tương quan giữa thói quen lướt mạng xã hội và khả năng tập trung chú ý của sinh viên.
+              </p>
+
+              <!-- Countdown Display -->
+              <div class="mt-4 p-2.5 rounded-xl bg-amber-50/70 border border-amber-100 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-amber-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" aria-hidden="true" class="lucide lucide-calendar w-4 h-4 text-amber-600"><path d="M8 2v3"></path><path d="M16 2v3"></path><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path></svg>
+                  <span class="text-xs font-semibold">Thời gian còn lại:</span>
+                </div>
+                <div class="font-mono font-bold text-sm text-amber-700 tracking-tight" id="countdownTimer3">
+                  28:15:00
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <span class="text-[11px] text-slate-400">Hạn: 23:59 Ngày mai</span>
+              <button onclick="openModal('modalSubmit', 'PP Nghiên cứu Khoa học - Đề cương nhóm')" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white text-xs font-bold rounded-xl shadow-md shadow-amber-200 flex items-center gap-1.5 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload-cloud" aria-hidden="true" class="lucide lucide-upload-cloud w-3.5 h-3.5"><path d="M12 13v8"></path><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="m8 17 4-4 4 4"></path></svg>
+                <span>Nộp bài ngay</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- LAYOUT 2 CỘT: KHU VỰC 2 (MÔN HỌC KỲ NÀY) & KHU VỰC 3 (LỊCH GỌN GÀNG) -->
+      <!-- ========================================================================= -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+        
+        <!-- ===================================================================== -->
+        <!-- KHU VỰC 2: CÁC HỌC PHẦN KỲ NÀY (MY ACTIVE COURSES - 8 COLS) -->
+        <!-- Chỉ hiển thị 4 môn đang học kỳ này. Tuyệt đối ẩn môn cũ để giảm tải -->
+        <!-- ===================================================================== -->
+        <section class="lg:col-span-8 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-6 bg-indigo-600 rounded-full"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                Các học phần kỳ này
+                <span class="text-xs font-normal text-slate-500 ml-1">(4 môn đang học)</span>
+              </h2>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-medium text-slate-400 hidden sm:inline">Ẩn môn cũ để tránh phân tán nhận thức</span>
+              <button onclick="showToast('Tất cả 4 học phần hiện tại đã được đồng bộ')" class="text-xs text-indigo-600 hover:text-indigo-800 font-semibold flex items-center gap-1">
+                <span>Tuần 8</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-right" aria-hidden="true" class="lucide lucide-chevron-right w-3.5 h-3.5"><path d="m9 18 6-6-6-6"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Grid 4 Môn Học Chính (Card Grid 2x2) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Môn 1: Tâm lý học Nhận thức -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-soft hover:shadow-card hover:border-indigo-200 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="brain-circuit" aria-hidden="true" class="lucide lucide-brain-circuit w-5 h-5"><path d="M12 13h4"></path><path d="M12 18h6a2 2 0 012 2v1"></path><path d="M12 8h8"></path><path d="M12 9a4.17 4.17 0 01-3 4"></path><path d="M16 8V5a2 2 0 012-2"></path><path d="M6 18a4 4 0 01-2-7.465"></path><path d="M6.004 5.125a4 4 0 00-2.526 5.77"></path><path d="M6.294 6.294A3 3 0 1112 5v13a4 4 0 11-7.967-.518"></path><circle cx="16" cy="13" r="0.5" fill="currentColor"></circle><circle cx="18" cy="3" r="0.5" fill="currentColor"></circle><circle cx="20" cy="21" r="0.5" fill="currentColor"></circle><circle cx="20" cy="8" r="0.5" fill="currentColor"></circle></svg>
+                  </div>
+                  <span class="text-[11px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                    TLH201
+                  </span>
+                </div>
+
+                <h3 class="font-bold text-slate-900 text-base mt-3 hover:text-indigo-600 transition-colors cursor-pointer" onclick="openLectureModal('Tâm lý học Nhận thức', 'Tuần 8: Mô hình trí nhớ làm việc Baddeley')">
+                  Tâm lý học Nhận thức
+                </h3>
+                
+                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1.5">
+                  <div class="w-5 h-5 rounded-full bg-slate-200 text-[10px] font-bold flex items-center justify-center text-slate-600">
+                    VN
+                  </div>
+                  <span>TS. Nguyễn Văn Nam</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-4">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="text-slate-400 font-medium">Tiến độ hoàn thành:</span>
+                    <span class="font-bold text-indigo-600">68%</span>
+                  </div>
+                  <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-indigo-600 rounded-full" style="width: 68%"></div>
+                  </div>
+                </div>
+
+                <!-- Current Week Context Tag -->
+                <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-blue-50/60 border border-blue-100/70 flex items-center gap-2 text-xs text-blue-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5 text-blue-600 shrink-0"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+                  <span class="truncate font-medium">Tuần 8: Trí nhớ làm việc (Baddeley)</span>
+                </div>
+              </div>
+
+              <!-- 1-Click Action to this week's content -->
+              <div class="mt-4 pt-3 border-t border-slate-100">
+                <button onclick="openLectureModal('Tâm lý học Nhận thức', 'Tuần 8: Mô hình trí nhớ làm việc Baddeley')" class="w-full py-2 px-3 bg-indigo-50 hover:bg-indigo-600 hover:text-white text-indigo-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle w-4 h-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                  <span>Vào bài học tuần này</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Môn 2: Tâm lý học Phát triển -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-soft hover:shadow-card hover:border-emerald-200 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sprout" aria-hidden="true" class="lucide lucide-sprout w-5 h-5"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"></path><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"></path><path d="M5 21h14"></path></svg>
+                  </div>
+                  <span class="text-[11px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                    TLH204
+                  </span>
+                </div>
+
+                <h3 class="font-bold text-slate-900 text-base mt-3 hover:text-emerald-600 transition-colors cursor-pointer" onclick="openLectureModal('Tâm lý học Phát triển', 'Tuần 8: Tư duy trực quan &amp; Thao tác cụ thể')">
+                  Tâm lý học Phát triển
+                </h3>
+                
+                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1.5">
+                  <div class="w-5 h-5 rounded-full bg-slate-200 text-[10px] font-bold flex items-center justify-center text-slate-600">
+                    TH
+                  </div>
+                  <span>ThS. Lê Thu Hà</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-4">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="text-slate-400 font-medium">Tiến độ hoàn thành:</span>
+                    <span class="font-bold text-emerald-600">82%</span>
+                  </div>
+                  <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500 rounded-full" style="width: 82%"></div>
+                  </div>
+                </div>
+
+                <!-- Current Week Context Tag -->
+                <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-emerald-50/60 border border-emerald-100/70 flex items-center gap-2 text-xs text-emerald-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5 text-emerald-600 shrink-0"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+                  <span class="truncate font-medium">Tuần 8: Tư duy trực quan &amp; thao tác</span>
+                </div>
+              </div>
+
+              <!-- 1-Click Action to this week's content -->
+              <div class="mt-4 pt-3 border-t border-slate-100">
+                <button onclick="openLectureModal('Tâm lý học Phát triển', 'Tuần 8: Tư duy trực quan &amp; Thao tác cụ thể')" class="w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-600 hover:text-white text-emerald-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle w-4 h-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                  <span>Vào bài học tuần này</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Môn 3: Phương pháp nghiên cứu Khoa học -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-soft hover:shadow-card hover:border-amber-200 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="microscope" aria-hidden="true" class="lucide lucide-microscope w-5 h-5"><path d="M6 18h8"></path><path d="M3 22h18"></path><path d="M14 22a7 7 0 1 0 0-14h-1"></path><path d="M9 14h2"></path><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path></svg>
+                  </div>
+                  <span class="text-[11px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                    NCK102
+                  </span>
+                </div>
+
+                <h3 class="font-bold text-slate-900 text-base mt-3 hover:text-amber-600 transition-colors cursor-pointer" onclick="openLectureModal('PP Nghiên cứu Khoa học', 'Tuần 8: Thiết kế thực nghiệm và biến số')">
+                  PP Nghiên cứu Khoa học
+                </h3>
+                
+                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1.5">
+                  <div class="w-5 h-5 rounded-full bg-slate-200 text-[10px] font-bold flex items-center justify-center text-slate-600">
+                    TL
+                  </div>
+                  <span>PGS. TS. Trần Đình Long</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-4">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="text-slate-400 font-medium">Tiến độ hoàn thành:</span>
+                    <span class="font-bold text-amber-600">45%</span>
+                  </div>
+                  <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-amber-500 rounded-full" style="width: 45%"></div>
+                  </div>
+                </div>
+
+                <!-- Current Week Context Tag -->
+                <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-amber-50/60 border border-amber-100/70 flex items-center gap-2 text-xs text-amber-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5 text-amber-600 shrink-0"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+                  <span class="truncate font-medium">Tuần 8: Thiết kế nghiên cứu thực nghiệm</span>
+                </div>
+              </div>
+
+              <!-- 1-Click Action to this week's content -->
+              <div class="mt-4 pt-3 border-t border-slate-100">
+                <button onclick="openLectureModal('PP Nghiên cứu Khoa học', 'Tuần 8: Thiết kế thực nghiệm và biến số')" class="w-full py-2 px-3 bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle w-4 h-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                  <span>Vào bài học tuần này</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Môn 4: Thống kê ứng dụng trong KHXH -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-soft hover:shadow-card hover:border-purple-200 transition-all flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between">
+                  <div class="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bar-chart-2" aria-hidden="true" class="lucide lucide-bar-chart-2 w-5 h-5"><path d="M5 21v-6"></path><path d="M12 21V3"></path><path d="M19 21V9"></path></svg>
+                  </div>
+                  <span class="text-[11px] font-mono font-semibold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                    TKX202
+                  </span>
+                </div>
+
+                <h3 class="font-bold text-slate-900 text-base mt-3 hover:text-purple-600 transition-colors cursor-pointer" onclick="openLectureModal('Thống kê ứng dụng', 'Tuần 8: Phân tích phương sai ANOVA một chiều')">
+                  Thống kê ứng dụng
+                </h3>
+                
+                <div class="flex items-center gap-2 text-xs text-slate-500 mt-1.5">
+                  <div class="w-5 h-5 rounded-full bg-slate-200 text-[10px] font-bold flex items-center justify-center text-slate-600">
+                    HT
+                  </div>
+                  <span>TS. Hoàng Minh Tuấn</span>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-4">
+                  <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="text-slate-400 font-medium">Tiến độ hoàn thành:</span>
+                    <span class="font-bold text-purple-600">54%</span>
+                  </div>
+                  <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-purple-500 rounded-full" style="width: 54%"></div>
+                  </div>
+                </div>
+
+                <!-- Current Week Context Tag -->
+                <div class="mt-3 py-1.5 px-2.5 rounded-lg bg-purple-50/60 border border-purple-100/70 flex items-center gap-2 text-xs text-purple-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-3.5 h-3.5 text-purple-600 shrink-0"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+                  <span class="truncate font-medium">Tuần 8: Phân tích ANOVA &amp; SPSS</span>
+                </div>
+              </div>
+
+              <!-- 1-Click Action to this week's content -->
+              <div class="mt-4 pt-3 border-t border-slate-100">
+                <button onclick="openLectureModal('Thống kê ứng dụng', 'Tuần 8: Phân tích phương sai ANOVA một chiều')" class="w-full py-2 px-3 bg-purple-50 hover:bg-purple-600 hover:text-white text-purple-700 text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle w-4 h-4"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                  <span>Vào bài học tuần này</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- KHU VỰC 3: LỊCH HỌC & NHẮC NHỞ TUẦN (COMPACT SCHEDULE - 4 COLS) -->
+        <!-- Chỉ hiển thị HÔM NAY và NGÀY MAI. Không nhồi nhét cả tháng -->
+        <!-- ===================================================================== -->
+        <section class="lg:col-span-4 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-6 bg-blue-600 rounded-full"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                Lịch học &amp; Lịch thi
+              </h2>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Hôm nay &amp; Mai</span>
+          </div>
+
+          <!-- Schedule Card Container -->
+          <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-soft space-y-4">
+            
+            <!-- Tab Switcher: Hôm nay vs Ngày mai -->
+            <div class="flex p-1 bg-slate-100 rounded-xl text-xs font-semibold">
+              <button id="btnSchedToday" onclick="switchScheduleTab('today')" class="flex-1 py-1.5 rounded-lg bg-white text-slate-900 shadow-2xs text-center transition-all">
+                Hôm nay (Thứ 6, 15/11)
+              </button>
+              <button id="btnSchedTomorrow" onclick="switchScheduleTab('tomorrow')" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 text-center transition-all">
+                Ngày mai (Thứ 7, 16/11)
+              </button>
+            </div>
+
+            <!-- Content Tab: Hôm nay -->
+            <div id="schedContentToday" class="space-y-3">
+              
+              <!-- Item 1: Sáng (Đã qua) -->
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/60 opacity-60 flex items-start gap-3">
+                <div class="text-center font-mono shrink-0">
+                  <div class="text-xs font-bold text-slate-700">08:00</div>
+                  <div class="text-[10px] text-slate-400">10:30</div>
+                </div>
+                <div class="border-l border-slate-200 pl-3">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] font-semibold text-slate-500 bg-slate-200 px-1.5 py-0.2 rounded">Tiết 1-3</span>
+                    <span class="text-[10px] text-slate-400 font-mono">Đã kết thúc</span>
+                  </div>
+                  <h4 class="text-xs font-bold text-slate-700 mt-0.5">Tâm lý học Nhận thức (Lý thuyết)</h4>
+                  <p class="text-[11px] text-slate-400 mt-0.5 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin w-3 h-3"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg> Phòng B204 (Tòa nhà B)
+                  </p>
+                </div>
+              </div>
+
+              <!-- Item 2: Chiều (Sắp diễn ra - Active) -->
+              <div class="p-3 rounded-xl bg-blue-50/70 border-2 border-blue-300 shadow-xs flex items-start gap-3">
+                <div class="text-center font-mono shrink-0">
+                  <div class="text-xs font-bold text-blue-700">13:30</div>
+                  <div class="text-[10px] text-blue-500">16:00</div>
+                </div>
+                <div class="border-l-2 border-blue-400 pl-3 flex-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-semibold text-blue-700 bg-blue-100 px-1.5 py-0.5 rounded">Tiết 6-8 • Sắp diễn ra</span>
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                  </div>
+                  <h4 class="text-xs font-bold text-slate-900 mt-1">Seminar: Thảo luận thực nghiệm trí nhớ</h4>
+                  <p class="text-[11px] text-blue-600 mt-0.5 flex items-center gap-1 font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="video" aria-hidden="true" class="lucide lucide-video w-3 h-3"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg> Google Meet • 
+                    <a href="javascript:void(0)" onclick="showToast('Đang kết nối phòng Meet của lớp...')" class="underline hover:text-blue-800">Bấm tham gia</a>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Item 3: Tối (Hạn nộp bài) -->
+              <div class="p-3 rounded-xl bg-rose-50/60 border border-rose-200 flex items-start gap-3">
+                <div class="text-center font-mono shrink-0">
+                  <div class="text-xs font-bold text-rose-600">23:59</div>
+                  <div class="text-[10px] text-rose-400">Đêm nay</div>
+                </div>
+                <div class="border-l border-rose-300 pl-3 flex-1">
+                  <span class="text-[10px] font-bold text-rose-700 bg-rose-100 px-1.5 py-0.2 rounded">Deadline nộp bài</span>
+                  <h4 class="text-xs font-bold text-slate-800 mt-0.5">Báo cáo thực nghiệm TLH Nhận thức</h4>
+                  <div class="mt-1 flex items-center justify-between">
+                    <span class="text-[10px] text-slate-400">File PDF định dạng APA</span>
+                    <button onclick="openModal('modalSubmit', 'Tâm lý học Nhận thức - Báo cáo thực nghiệm')" class="text-[11px] font-bold text-rose-600 hover:underline">
+                      Nộp ngay →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Content Tab: Ngày mai (Ẩn mặc định) -->
+            <div id="schedContentTomorrow" class="hidden space-y-3">
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                <div class="text-center font-mono shrink-0">
+                  <div class="text-xs font-bold text-slate-700">08:00</div>
+                  <div class="text-[10px] text-slate-400">11:15</div>
+                </div>
+                <div class="border-l border-slate-200 pl-3">
+                  <span class="text-[10px] font-semibold text-slate-500 bg-slate-200 px-1.5 py-0.2 rounded">Tiết 1-4</span>
+                  <h4 class="text-xs font-bold text-slate-800 mt-0.5">PP Nghiên cứu Khoa học</h4>
+                  <p class="text-[11px] text-slate-500 mt-0.5 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin w-3 h-3"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg> Giảng đường C101
+                  </p>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-emerald-50/60 border border-emerald-200 flex items-start gap-3">
+                <div class="text-center font-mono shrink-0">
+                  <div class="text-xs font-bold text-emerald-700">12:00</div>
+                  <div class="text-[10px] text-emerald-500">Trưa mai</div>
+                </div>
+                <div class="border-l border-emerald-300 pl-3 flex-1">
+                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">Hạn chót Quiz</span>
+                  <h4 class="text-xs font-bold text-slate-800 mt-0.5">Quiz 15' Tâm lý học Phát triển</h4>
+                  <button onclick="openQuizModal('Tâm lý học Phát triển', 'Quiz 15 phút: Thuyết nhận thức Piaget')" class="mt-1 text-[11px] font-bold text-emerald-700 hover:underline">
+                    Vào làm bài ngay →
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Mini Calendar Indicator (Chỉ tuần hiện tại) -->
+            <div class="pt-3 border-t border-slate-100">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
+                <span class="font-semibold text-slate-700">Lịch tuần 8</span>
+                <span class="text-[11px] text-slate-400">11 - 17 Tháng 11</span>
+              </div>
+              <div class="grid grid-cols-7 gap-1 text-center font-mono text-[11px]">
+                <div class="p-1 rounded text-slate-400">T2<br><span class="text-[10px]">11</span></div>
+                <div class="p-1 rounded text-slate-400">T3<br><span class="text-[10px]">12</span></div>
+                <div class="p-1 rounded text-slate-400">T4<br><span class="text-[10px]">13</span></div>
+                <div class="p-1 rounded text-slate-400">T5<br><span class="text-[10px]">14</span></div>
+                <div class="p-1 rounded bg-indigo-600 text-white font-bold shadow-2xs">T6<br><span class="text-[10px]">15</span></div>
+                <div class="p-1 rounded bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200">T7<br><span class="text-[10px]">16</span></div>
+                <div class="p-1 rounded text-slate-400">CN<br><span class="text-[10px]">17</span></div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PHIÊN BẢN 2: GIAO DIỆN LMS CŨ (MÔ PHỎNG QUÁ TẢI NHẬN THỨC & RỐI MẮT) -->
+  <!-- Dùng để đối chứng trong bài nghiên cứu và thử nghiệm người dùng -->
+  <!-- ========================================================================= -->
+  <div id="viewOldLMS" class="hidden old-lms min-h-screen text-xs p-2">
+    
+    <!-- Header phong cách cổ điển lộn xộn -->
+    <div class="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-3 border-b-4 border-yellow-500">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div>
+          <h1 class="text-xl font-bold tracking-tight">CỔNG THÔNG TIN ĐÀO TẠO &amp; HỆ THỐNG QUẢN LÝ HỌC TẬP TRỰC TUYẾN E-LEARNING (PHIÊN BẢN CŨ 2.4.1)</h1>
+          <p class="text-[11px] text-yellow-200">TRƯỜNG ĐẠI HỌC KHOA HỌC XÃ HỘI VÀ NHÂN VĂN - ĐHQG TP.HCM | HỆ THỐNG MÁY CHỦ SỐ 03</p>
+        </div>
+        <div class="text-right text-[11px]">
+          <div>Xin chào: <strong>Phạm Minh Nhật (22001429)</strong> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#" class="text-yellow-300">Đăng xuất</a></div>
+          <div>IP: 115.78.22.109 | Lần đăng nhập cuối: 12/11/2026 07:11:02</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanh Menu chằng chịt 20 mục ngang -->
+    <div class="bg-slate-200 border-b border-slate-400 p-1 flex flex-wrap gap-2 text-[11px] max-w-7xl mx-auto">
+      <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Trang chủ</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Tin tức chung</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Văn bản quy chế</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Tra cứu điểm</a> | 
+      <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Thời khóa biểu toàn trường</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Khảo sát giảng viên</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Học phí &amp; Biên lai</a> | 
+      <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Cổng dịch vụ một cửa</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Thư viện số DSpace</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Đoàn Thanh niên - Hội SV</a> | 
+      <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Trang phục tốt nghiệp</a> | <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Email sinh viên</a>
+    </div>
+
+    <!-- Dòng thông báo Marquee chạy chữ nhức mắt -->
+    <div class="bg-yellow-200 border border-yellow-400 p-1 text-red-700 font-bold max-w-7xl mx-auto my-1 flex items-center gap-2">
+      <span class="bg-red-600 text-white px-1 text-[10px]">KHẨN:</span>
+      <marquee scrollamount="6">
+        Thông báo số 189/TB-ĐHKHXHNV về việc nộp học phí bổ sung học kỳ 1 năm học 2024-2025 hạn chót đến 17h00 ngày 20/11/2026. Sinh viên không nộp sẽ bị cấm thi học phần. Xem danh sách chi tiết tại phòng KHTC. Khám sức khỏe nghĩa vụ quân sự đợt 2 cho nam sinh viên K46...
+      </marquee>
+    </div>
+
+    <!-- Layout 3 cột kinh điển gây phân tán chú ý cực độ -->
+    <div class="max-w-7xl mx-auto grid grid-cols-12 gap-2 mt-2">
+      
+      <!-- Cột Trái (3 cols): Menu dọc & Lịch dày đặc -->
+      <div class="col-span-12 md:col-span-3 space-y-2">
+        
+        <div class="border border-blue-400 bg-white p-2">
+          <div class="bg-blue-800 text-white font-bold p-1 text-[11px]">ĐIỀU HƯỚNG HỆ THỐNG</div>
+          <ul class="list-disc pl-4 mt-1 space-y-0.5 text-[11px]">
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Trang cá nhân</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Trang web của trường</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Các huy hiệu của tôi (0)</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Các chứng chỉ số</a></li>
+            <li>
+              <span>Các khóa học của tôi (28 môn)</span>
+              <ul class="list-square pl-3 text-[10px] text-slate-600">
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 21-22] Triết học Mác-Lênin</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 21-22] Pháp luật đại cương</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK2 21-22] Kinh tế chính trị</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK2 21-22] Tư tưởng Hồ Chí Minh</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 22-23] Lịch sử tâm lý học</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 22-23] Tâm lý học đại cương 1</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK2 22-23] Tâm lý học đại cương 2</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK2 22-23] Sinh lý học thần kinh</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 23-24] Tâm lý học xã hội</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK1 23-24] Tâm lý học nhân cách</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[HK2 23-24] Tâm lý học lứa tuổi</a></li>
+                <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">...xem thêm 17 khóa học cũ khác</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Lịch dày đặc số liệu -->
+        <div class="border border-blue-400 bg-white p-2">
+          <div class="bg-blue-800 text-white font-bold p-1 text-[11px]">LỊCH TOÀN THÁNG (11/2026)</div>
+          <table class="w-full text-center text-[10px] mt-1 border-collapse">
+            <thead>
+              <tr class="bg-slate-200"><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>CN</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="text-slate-300">27</td><td class="text-slate-300">28</td><td class="text-slate-300">29</td><td class="text-slate-300">30</td><td class="text-slate-300">31</td><td>1</td><td>2</td></tr>
+              <tr><td>3</td><td>4</td><td class="bg-yellow-200 font-bold">5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+              <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td class="bg-red-400 font-bold text-white">15</td><td>16</td></tr>
+              <tr><td>17</td><td class="bg-yellow-200">18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+              <tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr>
+            </tbody>
+          </table>
+          <p class="text-[9px] text-slate-500 mt-1 italic">* Chú thích: Màu đỏ là hôm nay, màu vàng có sự kiện nhưng sinh viên phải rê chuột vào từng ngày để biết sự kiện gì.</p>
+        </div>
+
+      </div>
+
+      <!-- Cột Giữa (6 cols): Danh sách thông báo & Bảng môn học rối mắt -->
+      <div class="col-span-12 md:col-span-6 space-y-2">
+        
+        <!-- Bảng thông báo chung của cả trường từ năm 2021 đến nay -->
+        <div class="border border-slate-300 bg-white p-2">
+          <div class="bg-slate-200 font-bold p-1 border-b border-slate-400 text-red-800">
+            THÔNG BÁO TỪ BAN GIÁM HIỆU &amp; CÁC PHÒNG BAN (42 THÔNG BÁO CHƯA ĐỌC)
+          </div>
+          <div class="max-h-48 overflow-y-auto space-y-1 mt-1 text-[11px] p-1 border border-slate-200">
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[14/11] TB Về việc tổ chức hội diễn văn nghệ chào mừng 20/11</a> <span class="text-slate-400">(P.CTSV)</span></div>
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[13/11] Quyết định số 482/QĐ-XHNV về việc cấp học bổng khuyến khích kỳ 2</a> <span class="text-slate-400">(P.ĐT)</span></div>
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[11/11] Khảo sát việc làm cựu sinh viên tốt nghiệp năm 2021-2023</a> <span class="text-slate-400">(P.DN)</span></div>
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[08/11] Kế hoạch nghỉ Tết Nguyên Đán Ất Tỵ 2025 cho học viên cao học</a> <span class="text-slate-400">(P.SĐH)</span></div>
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[05/11] Cảnh báo sinh viên cảnh giác thủ đoạn lừa đảo qua mạng xã hội</a> <span class="text-slate-400">(P.CTSV)</span></div>
+            <div>• <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">[01/11] Đăng ký mượn phòng học nhóm tại nhà C</a> <span class="text-slate-400">(P.QT-TB)</span></div>
+          </div>
+        </div>
+
+        <!-- Môn học hiển thị dạng danh sách phẳng không phân cấp -->
+        <div class="border border-slate-300 bg-white p-2">
+          <div class="bg-slate-200 font-bold p-1 border-b border-slate-400">
+            TỔNG QUAN KHÓA HỌC (TẤT CẢ CÁC HỌC KỲ DỒN CHUNG)
+          </div>
+
+          <div class="mt-2 space-y-2">
+            <!-- Course 1 -->
+            <div class="border border-slate-300 p-2 bg-slate-50">
+              <div class="font-bold text-blue-900">
+                <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Học phần: 2024-2025.1.TLH201.01 - Tâm lý học Nhận thức (TS. Nguyễn Văn Nam)</a>
+              </div>
+              <p class="text-[10px] text-slate-600">Thư mục môn: Trang chủ / Các khoá học / Khoa Tâm lý học / Hệ Đại quy / Năm 3 / Học kỳ 1 / TLH201</p>
+              <div class="text-[11px] text-red-600 mt-1">
+                * Có 1 bài tập cần nộp: <a href="javascript:void(0)" onclick="openModal('modalSubmit', 'Tâm lý học Nhận thức - Báo cáo')" class="font-bold underline">Báo cáo thực nghiệm trí nhớ (Hạn chót: 23:59 15/11/2026)</a>
+              </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="border border-slate-300 p-2">
+              <div class="font-bold text-blue-900">
+                <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Học phần: 2024-2025.1.TLH204.02 - Tâm lý học Phát triển (ThS. Lê Thu Hà)</a>
+              </div>
+              <p class="text-[10px] text-slate-600">Thư mục môn: Trang chủ / Các khoá học / Khoa Tâm lý học / Hệ Đại quy / Năm 3 / Học kỳ 1 / TLH204</p>
+              <div class="text-[11px] text-red-600 mt-1">
+                * Có 1 bài trắc nghiệm: <a href="javascript:void(0)" onclick="openQuizModal('Tâm lý học Phát triển', 'Quiz 15 phút')" class="font-bold underline">Trắc nghiệm tuần 8 (Hạn: 12:00 16/11/2026)</a>
+              </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="border border-slate-300 p-2">
+              <div class="font-bold text-blue-900">
+                <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Học phần: 2024-2025.1.NCK102.04 - Phương pháp nghiên cứu Khoa học (PGS. TS. Trần Đình Long)</a>
+              </div>
+              <p class="text-[10px] text-slate-600">Thư mục môn: Trang chủ / Các khoá học / Bộ môn Phương pháp / NCK102</p>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="border border-slate-300 p-2">
+              <div class="font-bold text-blue-900">
+                <a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Học phần: 2024-2025.1.TKX202.01 - Thống kê ứng dụng trong KHXH (TS. Hoàng Minh Tuấn)</a>
+              </div>
+              <p class="text-[10px] text-slate-600">Thư mục môn: Trang chủ / Các khoá học / Bộ môn Toán Thống kê / TKX202</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cột Phải (3 cols): Tiện ích thừa thãi -->
+      <div class="col-span-12 md:col-span-3 space-y-2">
+        
+        <div class="border border-slate-300 bg-white p-2">
+          <div class="bg-blue-800 text-white font-bold p-1 text-[11px]">NGƯỜI DÙNG ĐANG TRỰC TUYẾN (89)</div>
+          <div class="text-[10px] text-slate-600 max-h-24 overflow-y-auto mt-1">
+            Nguyễn An, Trần Bình, Lê Cúc, Võ Dũng, Hoàng Em, Đặng Giang, Mai Hương, Trịnh Khang...
+          </div>
+        </div>
+
+        <div class="border border-slate-300 bg-white p-2">
+          <div class="bg-blue-800 text-white font-bold p-1 text-[11px]">THỜI TIẾT KHU VỰC THỦ ĐỨC</div>
+          <div class="text-center p-2">
+            <span class="text-lg font-bold">32°C</span> - Mây rải rác
+            <p class="text-[9px] text-slate-400">Tiện ích do nhà cung cấp bên thứ 3 cung cấp</p>
+          </div>
+        </div>
+
+        <div class="border border-slate-300 bg-white p-2">
+          <div class="bg-blue-800 text-white font-bold p-1 text-[11px]">LIÊN KẾT NHANH NGOÀI</div>
+          <ul class="list-disc pl-4 text-[11px] space-y-0.5">
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Trang Bộ GD&amp;ĐT</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Bảo hiểm y tế sinh viên</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Hòm thư góp ý Hiệu trưởng</a></li>
+            <li><a href="file:///C:/Users/Admin/Videos/Captures/tlh/index.html#">Đăng ký xe đạp điện</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Phân tích tâm lý học vì sao giao diện này gây ức chế -->
+    <div class="max-w-7xl mx-auto mt-4 p-3 bg-red-50 border border-red-300 rounded text-red-900 text-xs">
+      <strong>⚠️ Phân tích Tâm lý học Nhận thức tại màn hình này:</strong>
+      <ol class="list-decimal pl-5 mt-1 space-y-1">
+        <li><strong>Quá tải nhận thức ngoại lai (Extraneous Cognitive Load):</strong> Màn hình chứa hơn 70 đối tượng thị giác tranh chấp sự chú ý (thời tiết, người online, marquee, thông báo từ 3 năm trước).</li>
+        <li><strong>Vi phạm quy luật trí nhớ làm việc (Working Memory):</strong> Không gom nhóm theo mục đích học tập; sinh viên phải đọc qua hàng chục đường link chữ nhỏ để tìm xem môn nào cần nộp bài hôm nay.</li>
+        <li><strong>Thất bại về chú ý có chọn lọc (Selective Attention):</strong> Deadline quan trọng bị giấu lẩn khuất dưới dạng một dòng chữ nhỏ màu đen/đỏ trong thẻ khóa học sâu 4 tầng thư mục, mất trung bình 15-20 giây để quét thấy.</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: NỘP BÀI NHANH (SIMULATED FAST SUBMISSION POPUP) -->
+  <!-- ========================================================================= -->
+  <div id="modalSubmit" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs transition-opacity">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 transform transition-all scale-95 duration-200" id="modalSubmitBox">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-up" aria-hidden="true" class="lucide lucide-file-up w-5 h-5"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900" id="modalSubmitTitle">Nộp bài tập nhanh</h3>
+            <p class="text-xs text-slate-400 mt-0.5" id="modalSubmitSubtitle">Tâm lý học Nhận thức • Hạn chót: 23:59 hôm nay</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modalSubmit')" class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="py-4 space-y-4">
+        
+        <!-- Urgency Alert within Modal -->
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-center gap-2.5 text-xs text-amber-800">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="alert-circle" aria-hidden="true" class="lucide lucide-alert-circle w-4 h-4 text-amber-600 shrink-0"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+          <span>Bạn đang nộp trực tiếp không cần qua 4 tầng thư mục môn học. Thời gian còn lại: <strong>04 giờ 18 phút</strong>.</span>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div id="dropZone" onclick="document.getElementById('fileInput').click()" class="border-2 border-dashed border-slate-300 hover:border-indigo-500 hover:bg-indigo-50/30 rounded-2xl p-6 text-center cursor-pointer transition-all">
+          <input type="file" id="fileInput" class="hidden" onchange="handleFileSelect(event)">
+          <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-500 mx-auto flex items-center justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload" aria-hidden="true" class="lucide lucide-upload w-6 h-6"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg>
+          </div>
+          <div class="text-sm font-semibold text-slate-700" id="dropFileName">
+            Kéo thả tệp báo cáo vào đây, hoặc <span class="text-indigo-600 underline">chọn từ máy tính</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Hỗ trợ tệp: PDF, DOCX, ZIP (Tối đa 25MB)</p>
+        </div>
+
+        <!-- Submission Note -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Ghi chú cho Giảng viên (Không bắt buộc):</label>
+          <input type="text" placeholder="Ví dụ: Em gửi kèm phụ lục số liệu SPSS trong tệp nén..." class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100">
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+        <button onclick="closeModal('modalSubmit')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
+          Hủy bỏ
+        </button>
+        <button onclick="confirmSubmission()" id="btnConfirmSubmit" class="px-5 py-2 text-xs font-bold bg-rose-600 hover:bg-rose-700 active:scale-95 text-white rounded-xl shadow-md shadow-rose-200 flex items-center gap-1.5 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-4 h-4"><path d="M20 6 9 17l-5-5"></path></svg>
+          <span>Xác nhận nộp bài</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: XEM TÀI LIỆU TUẦN NHANH (SIMULATED LECTURE PREVIEW) -->
+  <!-- ========================================================================= -->
+  <div id="modalLecture" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs transition-opacity">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-100 transform transition-all scale-95 duration-200" id="modalLectureBox">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="book-open" aria-hidden="true" class="lucide lucide-book-open w-5 h-5"><path d="M12 5v16"></path><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"></path></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900" id="modalLectureTitle">Tài liệu học tập Tuần 8</h3>
+            <p class="text-xs text-slate-400 mt-0.5" id="modalLectureSubtitle">Tâm lý học Nhận thức</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modalLecture')" class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="py-4 space-y-3 text-xs">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between hover:bg-blue-50/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center font-bold text-[10px]">
+              PDF
+            </div>
+            <div>
+              <div class="font-bold text-slate-800">Slide_Tuan8_MoHinhBaddeley_V2.pdf</div>
+              <div class="text-[11px] text-slate-400">4.2 MB • Cập nhật sáng nay bởi TS. Nguyễn Văn Nam</div>
+            </div>
+          </div>
+          <button onclick="showToast('Đang tải xuống Slide bài giảng...')" class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg" title="Tải xuống">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" class="lucide lucide-download w-4 h-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+          </button>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between hover:bg-blue-50/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-[10px]">
+              DOC
+            </div>
+            <div>
+              <div class="font-bold text-slate-800">Mau_BaoCao_ThucNghiem_TriNho.docx</div>
+              <div class="text-[11px] text-slate-400">128 KB • Khung chuẩn định dạng APA 7th</div>
+            </div>
+          </div>
+          <button onclick="showToast('Đang tải xuống tệp mẫu báo cáo...')" class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg" title="Tải xuống">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" class="lucide lucide-download w-4 h-4"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+          </button>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between hover:bg-blue-50/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-[10px]">
+              VID
+            </div>
+            <div>
+              <div class="font-bold text-slate-800">Video_GhiAm_TietLyThuyet_15-11.mp4</div>
+              <div class="text-[11px] text-slate-400">Thời lượng: 1h 45m • Ghi hình từ Google Meet</div>
+            </div>
+          </div>
+          <button onclick="showToast('Đang mở phát video bài giảng...')" class="p-2 text-purple-600 hover:bg-purple-50 rounded-lg" title="Xem ngay">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" aria-hidden="true" class="lucide lucide-play w-4 h-4"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+        <span class="text-[11px] text-slate-400">Đã tối ưu: Bạn không cần lục tìm qua 4 tầng thư mục môn</span>
+        <button onclick="closeModal('modalLecture')" class="px-4 py-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors">
+          Đóng cửa sổ
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: LÀM QUIZ NHANH (SIMULATED QUIZ MODAL) -->
+  <!-- ========================================================================= -->
+  <div id="modalQuiz" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs transition-opacity">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 transform transition-all scale-95 duration-200" id="modalQuizBox">
+      
+      <div class="flex items-start justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="help-circle" aria-hidden="true" class="lucide lucide-help-circle w-5 h-5"><circle cx="12" cy="12" r="10"></circle><path d="M9 9.5a3 2.5 0 016 0c0 2-2 2-3 3.5"></path><path d="M12 17h.01"></path></svg>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-slate-900" id="modalQuizTitle">Quiz 15 phút: Thuyết nhận thức Piaget</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Môn: Tâm lý học Phát triển</p>
+          </div>
+        </div>
+        <button onclick="closeModal('modalQuiz')" class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="py-4 space-y-4 text-xs">
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-slate-400 block text-[10px]">Số câu hỏi</span>
+            <span class="text-base font-bold text-slate-800">10 câu</span>
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-slate-400 block text-[10px]">Thời gian làm</span>
+            <span class="text-base font-bold text-emerald-600">15 phút</span>
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-slate-400 block text-[10px]">Số lần làm</span>
+            <span class="text-base font-bold text-slate-800">1 lần duy nhất</span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-100 text-emerald-900 leading-relaxed">
+          <h4 class="font-bold mb-1">Mục tiêu củng cố kiến thức:</h4>
+          Kiểm tra hiểu biết về các khái niệm: Sơ đồ nhận thức (Schema), Đồng hóa (Assimilation), Điều biến (Accommodation) và các giai đoạn phát triển của Jean Piaget.
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+        <button onclick="closeModal('modalQuiz')" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors">
+          Để sau
+        </button>
+        <button onclick="startQuizSimulation()" class="px-5 py-2 text-xs font-bold bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white rounded-xl shadow-md shadow-emerald-200 flex items-center gap-1.5 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" aria-hidden="true" class="lucide lucide-play w-4 h-4 fill-current"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+          <span>Bắt đầu làm bài ngay</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <!-- ========================================================================= -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-800 text-xs">
+    <span class="p-1.5 bg-emerald-500/20 text-emerald-400 rounded-lg" id="toastIcon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-4 h-4"><path d="M20 6 9 17l-5-5"></path></svg>
+    </span>
+    <span id="toastMessage" class="font-medium">Thao tác thành công!</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC CHO A/B TESTING, MODALS, COUNTDOWNS & TƯƠNG TÁC -->
+  <!-- ========================================================================= -->
+  <script>
+    // Khởi tạo Lucide Icons
+    lucide.createIcons();
+
+    // 1. Logic chuyển đổi A/B Testing
+    function switchMode(mode) {
+      const viewNew = document.getElementById('viewNewLMS');
+      const viewOld = document.getElementById('viewOldLMS');
+      const btnNew = document.getElementById('btnModeNew');
+      const btnOld = document.getElementById('btnModeOld');
+
+      if (mode === 'new') {
+        viewNew.classList.remove('hidden');
+        viewOld.classList.add('hidden');
+        
+        btnNew.className = "px-3.5 py-1.5 rounded-lg font-semibold flex items-center gap-1.5 transition-all bg-indigo-600 text-white shadow-sm";
+        btnOld.className = "px-3.5 py-1.5 rounded-lg font-medium text-slate-300 hover:text-white flex items-center gap-1.5 transition-all";
+        
+        showToast("Đã chuyển sang: LMS Mới (Tối ưu hóa Nhận thức & Chú ý)");
+      } else {
+        viewNew.classList.add('hidden');
+        viewOld.classList.remove('hidden');
+
+        btnOld.className = "px-3.5 py-1.5 rounded-lg font-semibold flex items-center gap-1.5 transition-all bg-amber-500 text-slate-950 shadow-sm";
+        btnNew.className = "px-3.5 py-1.5 rounded-lg font-medium text-slate-300 hover:text-white flex items-center gap-1.5 transition-all";
+        
+        showToast("Đã chuyển sang: LMS Cũ (Mô phỏng Quá tải nhận thức)");
+      }
+      lucide.createIcons();
+    }
+
+    // 2. Bật / Tắt Chú giải Tâm lý học nhận thức
+    let showInsights = false;
+    function toggleCognitiveInsights() {
+      showInsights = !showInsights;
+      const banner = document.getElementById('cognitiveInsightsBanner');
+      const insightText = document.getElementById('insightText');
+
+      if (showInsights) {
+        banner.classList.remove('hidden');
+        insightText.innerText = "Tắt Chú Giải Nhận Thức";
+        showToast("Đang hiển thị cơ sở lý thuyết Tâm lý học nhận thức");
+      } else {
+        banner.classList.add('hidden');
+        insightText.innerText = "Bật Chú Giải Nhận Thức";
+      }
+      lucide.createIcons();
+    }
+
+    // 3. Tab Lịch học: Hôm nay vs Ngày mai
+    function switchScheduleTab(tab) {
+      const btnToday = document.getElementById('btnSchedToday');
+      const btnTomorrow = document.getElementById('btnSchedTomorrow');
+      const contentToday = document.getElementById('schedContentToday');
+      const contentTomorrow = document.getElementById('schedContentTomorrow');
+
+      if (tab === 'today') {
+        btnToday.className = "flex-1 py-1.5 rounded-lg bg-white text-slate-900 shadow-2xs text-center transition-all";
+        btnTomorrow.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 text-center transition-all";
+        contentToday.classList.remove('hidden');
+        contentTomorrow.classList.add('hidden');
+      } else {
+        btnTomorrow.className = "flex-1 py-1.5 rounded-lg bg-white text-slate-900 shadow-2xs text-center transition-all";
+        btnToday.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 text-center transition-all";
+        contentTomorrow.classList.remove('hidden');
+        contentToday.classList.add('hidden');
+      }
+      lucide.createIcons();
+    }
+
+    // 4. Modal Handlers
+    function openModal(modalId, contextName = '') {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+      
+      if (modalId === 'modalSubmit' && contextName) {
+        document.getElementById('modalSubmitTitle').innerText = 'Nộp bài: ' + contextName;
+      }
+      
+      modal.classList.remove('hidden');
+      const modalBox = modal.querySelector('div');
+      setTimeout(() => {
+        modalBox.classList.remove('scale-95');
+        modalBox.classList.add('scale-100');
+      }, 10);
+      lucide.createIcons();
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (!modal) return;
+      const modalBox = modal.querySelector('div');
+      modalBox.classList.remove('scale-100');
+      modalBox.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 150);
+    }
+
+    // Mở Modal Xem Tài Liệu Tuần
+    function openLectureModal(course, weekTopic) {
+      document.getElementById('modalLectureSubtitle').innerText = course;
+      document.getElementById('modalLectureTitle').innerText = 'Tài liệu học tập ' + weekTopic;
+      openModal('modalLecture');
+    }
+
+    // Mở Modal Quiz
+    function openQuizModal(course, quizTopic) {
+      document.getElementById('modalQuizTitle').innerText = quizTopic;
+      openModal('modalQuiz');
+    }
+
+    function startQuizSimulation() {
+      closeModal('modalQuiz');
+      showToast('Đang khởi tạo bài làm Quiz 15 phút với đồng hồ bấm giờ...');
+    }
+
+    // File Drag & Drop Simulation
+    function handleFileSelect(e) {
+      const files = e.target.files;
+      if (files && files[0]) {
+        document.getElementById('dropFileName').innerHTML = `Đã chọn: <span class="text-indigo-600 font-bold">${files[0].name}</span> (${(files[0].size/1024/1024).toFixed(2)} MB)`;
+        showToast(`Tệp "${files[0].name}" đã sẵn sàng nộp`);
+      }
+    }
+
+    // Xác nhận nộp bài
+    function confirmSubmission() {
+      const btn = document.getElementById('btnConfirmSubmit');
+      btn.innerHTML = `<span class="animate-spin inline-block mr-1">⌛</span> Đang tải lên...`;
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Xác nhận nộp bài</span>`;
+        btn.disabled = false;
+        closeModal('modalSubmit');
+        showToast('🎉 Nộp bài thành công! Hệ thống đã ghi nhận mã bưu bản số: #VN-88291');
+        lucide.createIcons();
+      }, 1000);
+    }
+
+    // 5. Toast Thông Báo Phản Hồi
+    let toastTimer;
+    function showToast(message, isSuccess = true) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMessage');
+      clearTimeout(toastTimer);
+
+      toastMsg.innerText = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // 6. Thông báo Popover Toggle
+    function toggleNotificationPanel() {
+      const p = document.getElementById('notifPanel');
+      p.classList.toggle('hidden');
+      lucide.createIcons();
+    }
+
+    // 7. Tìm kiếm nhanh (Selective Focus)
+    function showSearchDropdown(show) {
+      const drop = document.getElementById('searchDropdown');
+      if (show) {
+        drop.classList.remove('hidden');
+      } else {
+        setTimeout(() => drop.classList.add('hidden'), 200);
+      }
+    }
+
+    function handleSearch(term) {
+      const container = document.getElementById('searchResultsContainer');
+      const q = term.toLowerCase().trim();
+      if (!q) {
+        container.innerHTML = `
+          <button onclick="openModal('modalSubmit', 'Tâm lý học Nhận thức - Báo cáo thực nghiệm')" class="w-full text-left p-2 hover:bg-slate-50 rounded-lg flex items-center justify-between text-slate-700">
+            <span class="flex items-center gap-2"><i data-lucide="file-up" class="w-3.5 h-3.5 text-rose-500"></i> Nộp báo cáo: Trí nhớ làm việc (Hạn hôm nay)</span>
+            <span class="text-rose-500 font-medium text-[11px]">Còn 4h</span>
+          </button>
+          <button onclick="openLectureModal('Tâm lý học Nhận thức', 'Tuần 8: Mô hình trí nhớ làm việc Baddeley')" class="w-full text-left p-2 hover:bg-slate-50 rounded-lg flex items-center justify-between text-slate-700">
+            <span class="flex items-center gap-2"><i data-lucide="book-open" class="w-3.5 h-3.5 text-blue-500"></i> Bài giảng Tuần 8: Tâm lý học Nhận thức</span>
+            <span class="text-slate-400 text-[11px]">Slide PDF</span>
+          </button>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="p-2 text-slate-500">Kết quả khớp cho: <strong class="text-indigo-600">"${term}"</strong></div>
+          <button onclick="openLectureModal('Khóa học', '${term}')" class="w-full text-left p-2 bg-indigo-50/50 hover:bg-indigo-50 rounded-lg flex items-center gap-2 text-indigo-700">
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i> Mở bài học tuần liên quan đến "${term}"
+          </button>
+        `;
+      }
+      lucide.createIcons();
+    }
+
+    // Close popovers on outside click
+    document.addEventListener('click', (e) => {
+      const searchBox = document.getElementById('globalSearchInput');
+      const searchDrop = document.getElementById('searchDropdown');
+      if (searchBox && searchDrop && !searchBox.contains(e.target) && !searchDrop.contains(e.target)) {
+        searchDrop.classList.add('hidden');
+      }
+
+      const notifBtn = document.querySelector('[onclick="toggleNotificationPanel()"]');
+      const notifPanel = document.getElementById('notifPanel');
+      if (notifPanel && notifBtn && !notifBtn.contains(e.target) && !notifPanel.contains(e.target)) {
+        notifPanel.classList.add('hidden');
+      }
+    });
+
+    // Keyboard shortcut (Ctrl + K) focus search
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('globalSearchInput');
+        if (searchInput) {
+          searchInput.focus();
+          showSearchDropdown(true);
+        }
+      }
+    });
+
+    // 8. Đồng hồ đếm ngược sống (Live Countdown Simulation)
+    let secondsLeft1 = 4 * 3600 + 18 * 60 + 22; // 04:18:22
+    let secondsLeft2 = 16 * 3600 + 41 * 60 + 10; // 16:41:10
+
+    setInterval(() => {
+      if (secondsLeft1 > 0) secondsLeft1--;
+      if (secondsLeft2 > 0) secondsLeft2--;
+
+      const formatTime = (secs) => {
+        const h = Math.floor(secs / 3600).toString().padStart(2, '0');
+        const m = Math.floor((secs % 3600) / 60).toString().padStart(2, '0');
+        const s = Math.floor(secs % 60).toString().padStart(2, '0');
+        return `${h}:${m}:${s}`;
+      };
+
+      const timerEl1 = document.getElementById('countdownTimer1');
+      const timerEl2 = document.getElementById('countdownTimer2');
+      if (timerEl1) timerEl1.innerText = formatTime(secondsLeft1);
+      if (timerEl2) timerEl2.innerText = formatTime(secondsLeft2);
+    }, 1000);
+  </script>
+
+
+</body></html>
